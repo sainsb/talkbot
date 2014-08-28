@@ -1,28 +1,3 @@
-
-
-#import xmpp
-
-#login = 'redtrails'
-#pwd   = 'tortugas12'
-
-#cnx = xmpp.Client('gmail.com', debug=[])
-#cnx.connect(server=('talk.google.com',5223))
-#cnx.auth(login,pwd, 'botty')
-#cnx.send(xmpp.Message( "ben.sainsbury@oregonmetro.gov" ,"Hello World form Python" ) )
-
-#cnx.sendInitPresence()
-#import time
-#print('sleeping for a few')
-#time.sleep(10)
-#roster=cnx.getRoster()
-#jids = roster.getItems()
-#for i in jids:
-#        print i
-#        print "Name = %s" % roster.getName(i)
-#        print "Show = %s" % roster.getShow(i)
-#        print "Status = %s" % roster.getStatus(i)
-
-#!/usr/bin/python
 import sys, xmpp, os, datetime, serial
 
 class bcolors:
@@ -65,28 +40,21 @@ class person():
 people = []
 
 DRC=[
-     ['max.woodbury',0],
-     ['ben.sainsbury',1],
-     ['justin.houk',2],
-     ['clinton.chiavarini',3],
-     ['molly.vogt',4],
-     ['kellie.hauger',5],
-     ['linda.martin',6],
-     ['jeremy.murray',7],
-     ['karen.scott-lowthian',8],
-     ['steve.erickson',9],
-     ['zac.christensen',10],
-     ['minott.kerr',11]
+     ['user a',0],
+     ['user b',1],
+     ['user c',2],
+     ['user d',3],
+     ['user e',4],
+     ['user f',5],
+     ['user g',6],
+     ['user h',7],
+     ['user i',8],
      ]
 
 def presenceCB(conn,msg):
-    #print str(msg)
-    #if msg.getBody() is None:
-    #    return
-    #try:
+ 
     person=str(msg.getFrom().getStripped())
-    #person = str(msg.getFrom())
-    #print person
+
     print person
     for p in people:
         if person.split('@')[0].upper() == p.name.replace(' ','.').upper():
@@ -129,25 +97,6 @@ def presenceCB(conn,msg):
                     ser.write(str(p.id)+' '+serial_colors.AVAILABLE)
                     print bcolors.OKGREEN + str(p) + bcolors.ENDC+' '
 
-    #except Exception as e:
-    #    print str(e)
-
-        #if 'ben.sainsbury@oregonmetro.gov/Talk' in str(msg.getFrom()):
-
-        #if m == None and p==0:
-        #    print "signed out"
-        #elif m == "dnd":
-        #    print "do not disturb"
-        #elif m == "away" or m =="xa":
-        #    print "away"
-        #elif m is None and p==24:
-        #    print "available"
-        #else:
-        #    print "wtf"
-        #print "status: ",s,"show: ",m, "pri: ", p
-            
-        #print msg.getFrom(), "show", msg.getShow(), "status", msg.getStatus(), "priority", msg.getPriority()
-
 def StepOn(conn):
     try:
         conn.Process(1)
@@ -160,16 +109,12 @@ def GoOn(conn):
         pass
 
 def main():
-   
-    jid="gisdeveloper@oregonmetro.gov"
-    pwd = "G1SDevelope8"
         
-    jid="ben.sainsbury@oregonmetro.gov"
-    pwd = "myCaldera10"
+    jid=''#sainsb
+    pwd = ''#sainsb's password
 
     jid=xmpp.protocol.JID(jid)
 
-    #cl = xmpp.Client(jid.getDomain())
     cl = xmpp.Client(jid.getDomain(), debug=[])
 
     if cl.connect(server=('talk.google.com', 5222)) == "":
